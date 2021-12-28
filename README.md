@@ -1,6 +1,6 @@
 # RepairService
 - Lenguajes Utilizados
-- Python/Django
+- Python/DjangoREST
 - Javascript/React.js
 - HTML/CSS
 - PostGreSQL
