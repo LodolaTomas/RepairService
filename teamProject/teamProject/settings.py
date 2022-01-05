@@ -50,7 +50,7 @@ INSTALLED_APPS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
+    "http://localhost:8000"
 ]
 
 MIDDLEWARE = [
@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'teamProject.wsgi.application'
 DATABASES = {
 	'default': {
 		'ENGINE': 'django.db.backends.postgresql_psycopg2',
-		'NAME' : 'teamproject',
+		'NAME' : 'd3ku3hdf2ugrtk',
 		'USER' : os.environ['user'],
 		'PASSWORD' : os.environ['password'],
 		'HOST' : os.environ['host'], 
