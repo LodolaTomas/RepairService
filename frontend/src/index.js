@@ -9,4 +9,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-let banana = 1
