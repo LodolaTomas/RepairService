@@ -17,7 +17,7 @@ def cliente_list(request):
         return JsonResponse(serializers.data, safe=False,status=200)
     elif request.method == 'POST':
         print(request.POST)
-        data =  JSONParser().parse(request) z b  rer
+        data =  JSONParser().parse(request) #z b  rer no se que es esto pero me tiraba error.
         serializers = ClienteSerializer(data=data)
         if serializers.is_valid():
             serializers.save()

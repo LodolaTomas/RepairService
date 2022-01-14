@@ -21,15 +21,32 @@ class Tecnico(models.Model):
     apellido = models.CharField(max_length=45)
     email = models.EmailField(unique=True)
     foto = models.CharField(max_length=45, blank=True, null=True)
+    # Muestra Nombre Apellido y Cuil
+    def __str__(self):
+        return f'{self.nombre} {self.apellido} - {self.cuil}'
 
 class Especialidades(models.Model):
     nombre_especialidad = models.CharField(max_length=45)
 
+    def  __str__(self):
+        return f'{self.nombre_especialidad}'
+
 class Tecnicos_Especialidad(models.Model):
    cuil_tecnico = models.ForeignKey(Tecnico, on_delete=CASCADE)
-   especialidades_id = models.ManyToManyField(Especialidades)
+   especialidades_id = models.ManyToManyField(Especialidades)   
+   
+   
+   
+   def __str__(self):
+       #Tengo que ver como mostrar las especialidades, ManyToManyField cannot iterate
+       return f'{self.cuil_tecnico}'
+       
+
+   
 
 
+
+# Reporte de Incidentes
 # Hacer que se vea los datos y no object. Seguir con tecnico un poco mas. Cliente Sigue.
 #06/01/2022
 
