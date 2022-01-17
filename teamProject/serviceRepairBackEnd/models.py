@@ -34,17 +34,17 @@ class Especialidades(models.Model):
 class Tecnicos_Especialidad(models.Model):
    cuil_tecnico = models.ForeignKey(Tecnico, on_delete=CASCADE)
    especialidades_id = models.ManyToManyField(Especialidades)   
-   
-   
-   
-   def __str__(self):
-       #Tengo que ver como mostrar las especialidades, ManyToManyField cannot iterate
-       return f'{self.cuil_tecnico}'
-       
-
-   
 
 
+   def __str__(self): 
+       valores = list(self.especialidades_id.values())
+       especialidades = ""
+       tecnico = str(self.cuil_tecnico)
+
+       for valor in valores:
+           especialidades += valor["nombre_especialidad"] + " "
+                   
+       return tecnico + " - " + especialidades
 
 # Reporte de Incidentes
 # Hacer que se vea los datos y no object. Seguir con tecnico un poco mas. Cliente Sigue.
