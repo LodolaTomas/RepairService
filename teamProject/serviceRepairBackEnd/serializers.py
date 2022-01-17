@@ -2,7 +2,7 @@
 from rest_framework import serializers
 from .models import Cliente, Tecnico, Tecnicos_Especialidad, Especialidades
 
-
+## transforma de obj a json
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente

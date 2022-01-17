@@ -1,25 +1,56 @@
-from django.shortcuts import render, HttpResponse
-from rest_framework import serializers
-from .models import Cliente
-from .serializers import ClienteSerializer
-from django.http import JsonResponse
-from rest_framework.parsers import JSONParser
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-# Create your views here.
+from rest_framework.parsers import JSONParser
+from .serializers import ClienteSerializer # para los metodos post necesito importar el serializer
+from .models import Cliente
+
+
 
 @csrf_exempt
-def cliente_list(request):
-    
-    #get all clients
+def client_api(request):
+    """
+    List all clients, or create a new client.
+    """
     if request.method == 'GET':
-        clientes = Cliente.objects.all()
-        serializers = ClienteSerializer(clientes, many=True)
-        return JsonResponse(serializers.data, safe=False,status=200)
+        cliente = Cliente.objects.all()
+        serializer = ClienteSerializer(cliente, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
     elif request.method == 'POST':
-        print(request.POST)
-        data =  JSONParser().parse(request) #z b  rer no se que es esto pero me tiraba error.
-        serializers = ClienteSerializer(data=data)
-        if serializers.is_valid():
-            serializers.save()
-            return JsonResponse(serializers.data, status=201)
-    return JsonResponse(serializers.errors, status=400)
+        data = JSONParser().parse(request)
+        cliente = ClienteSerializer(data=data)
+        if cliente.is_valid():
+            cliente.save()
+            return JsonResponse(cliente.data, status=201)
+        return JsonResponse(cliente.errors, status=400)
+
+    elif request.method == 'DELETE':
+        cliente = Cliente.objects.all()
+        cliente.delete()
+        return HttpResponse(status=204)
+    
+@csrf_exempt
+def client_detail (request, cuil):
+    """
+    Retrieve, update or delete a client.
+    """
+    try:
+        cliente = Cliente.objects.get(cuil=cuil)
+    except Cliente.DoesNotExist:
+        return HttpResponse(status=404)
+
+    if request.method == 'GET':
+        serializer = ClienteSerializer(cliente)
+        return JsonResponse(serializer.data)
+
+    elif request.method == 'PUT':
+        data = JSONParser().parse(request)
+        serializer = ClienteSerializer(cliente, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data)
+        return JsonResponse(serializer.errors, status=400)
+
+    elif request.method == 'DELETE':
+        cliente.delete()
+        return HttpResponse(status=204)
