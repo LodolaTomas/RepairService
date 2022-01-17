@@ -1,18 +1,11 @@
 from django.db import models
-from django.db.models.deletion import CASCADE, SET_NULL
+from django.db.models.deletion import CASCADE
 # Jerarquia BBDD
 # 1-Admin
 # 2-Moderador
-# 3-Tecnico
-# 4-Cliente listo
-
-# Clases primarias
-
-class Cliente(models.Model):
-    cuil = models.IntegerField()
-    nombre = models.CharField(max_length=45)
-    apellido = models.CharField(max_length=45)
-    foto = models.CharField(max_length=45)
+# 3-Tecnico Listo
+# 4-Empleado
+# 5-Cliente Listo 
 
 # Tecnico 
 class Tecnico(models.Model):
@@ -45,6 +38,23 @@ class Tecnicos_Especialidad(models.Model):
            especialidades += valor["nombre_especialidad"] + " "
                    
        return tecnico + " - " + especialidades
+
+# Empleado
+class Empleado(models.Model):
+    cuil = models.IntegerField()
+    nombre = models.CharField(max_length=45)
+    apellido = models.CharField(max_length=45)
+    foto = models.CharField(max_length=45)
+    roll = models.IntegerField()
+
+# Cliente
+class Cliente(models.Model):
+    cuil = models.IntegerField()
+    nombre = models.CharField(max_length=45)
+    apellido = models.CharField(max_length=45)
+    foto = models.CharField(max_length=45)
+
+
 
 # Reporte de Incidentes
 # Hacer que se vea los datos y no object. Seguir con tecnico un poco mas. Cliente Sigue.
