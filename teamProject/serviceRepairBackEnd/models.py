@@ -13,7 +13,7 @@ class Tecnico(models.Model):
     nombre = models.CharField(max_length=45)
     apellido = models.CharField(max_length=45)
     email = models.EmailField(unique=True)
-    foto = models.CharField(max_length=45, blank=True, null=True)
+    image = models.ImageField(upload_to='imagesTecnico')
     # Muestra Nombre Apellido y Cuil
     def __str__(self):
         return f'{self.nombre} {self.apellido} - {self.cuil}'
@@ -44,7 +44,7 @@ class Empleado(models.Model):
     cuil = models.IntegerField()
     nombre = models.CharField(max_length=45)
     apellido = models.CharField(max_length=45)
-    foto = models.CharField(max_length=45)
+    image = models.ImageField(upload_to='imagesEmpleado')
     roll = models.IntegerField()
 
 # Cliente
@@ -52,12 +52,13 @@ class Cliente(models.Model):
     cuil = models.IntegerField()
     nombre = models.CharField(max_length=45)
     apellido = models.CharField(max_length=45)
-    foto = models.CharField(max_length=45)
+    image = models.ImageField(upload_to='imagesCliente', blank = True)
 
 
 
 # Reporte de Incidentes
-# Hacer que se vea los datos y no object. Seguir con tecnico un poco mas. Cliente Sigue.
-#06/01/2022
 
+
+# Se suben las imagenes a la carpeta de upload en sus distintas categorias para ser usadas. 
+# Cliente es opcional. Pero empleado y tecnico son obligatorias.
 

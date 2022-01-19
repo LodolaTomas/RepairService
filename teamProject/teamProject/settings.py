@@ -143,3 +143,7 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Para guardar las img en una carpeta y no en la BBDD
+MEDIA_ROOT = BASE_DIR / 'uploads'
+MEDIA_URL = '/files/'
