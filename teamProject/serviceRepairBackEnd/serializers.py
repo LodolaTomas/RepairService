@@ -6,12 +6,12 @@ from .models import Cliente, Tecnico, Tecnicos_Especialidad, Especialidades
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        fields = ('cuil', 'nombre', 'apellido', 'foto')
+        fields = ('cuil', 'nombre', 'apellido', 'image')
     
 class TecnicoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tecnico
-        fields = ('cuil', 'nombre', 'apellido', 'email', 'foto')
+        fields = ('cuil', 'nombre', 'apellido', 'email', 'image')
 
 class EspecialidadesSerializer(serializers.ModelSerializer):
     class Meta:
