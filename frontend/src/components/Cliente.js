@@ -4,6 +4,7 @@ export const Cliente = ({ nombre, apellido, image }) => {
 
     return (
         <>
+            <h1>Hola</h1>
             <h1>{nombre}</h1>
             <h2>{apellido}</h2>
             <Image image={image} />

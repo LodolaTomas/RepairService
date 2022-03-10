@@ -56,6 +56,13 @@ class Cliente(models.Model):
     apellido = models.CharField(max_length=45)
     image = models.ImageField(upload_to='imagesCliente', blank = True)
 
+    def __str__(self):
+        nombre = self.nombre
+        apellido = self.apellido
+        cuil = str(self.cuil)
+
+        return nombre + " " + apellido + " - " + cuil
+
 
 
 # Reporte de Incidentes
