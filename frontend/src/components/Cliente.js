@@ -1,14 +1,11 @@
-import { Image } from './Image.js';
-
-export const Cliente = ({ nombre, apellido, image }) => {
-
-    return (
+/* Lo uso para verificar si las url del back estan correctas.*/
+export const Tecnico = ({cuil , nombre, apellido, email}) => {
+    return(
         <>
-            <h1>Hola</h1>
+            <h1>{cuil}</h1>
             <h1>{nombre}</h1>
-            <h2>{apellido}</h2>
-            <Image image={image} />
+            <h1>{apellido}</h1>
+            <h1>{email}</h1>
         </>
-    );
+    )
 }
-

@@ -2,9 +2,11 @@ import React, {Fragment} from 'react'
 import './register.css'
 /*import { useForm } from 'react-hook-form'*/
 import axios from 'axios';
+import {useNavigate} from 'react-router-dom'
 
 const Register = () => {
     /*const {register, errors, handleSubmit} = useForm();*/
+    const navigate = useNavigate()
 
     const onSubmit = (data) => {
         /* axios.post con then espero respueta*/
@@ -17,7 +19,9 @@ const Register = () => {
         }
         axios.post('http://127.0.0.1:8000/cliente', newCliente)
         .then(res => {
-            console.log(res);
+            if(res.statusText === "Created"){
+                navigate("/")
+            }        
         })
         .error(res => {
             console.error(res)

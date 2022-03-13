@@ -5,5 +5,6 @@ from . import views
 
 urlpatterns = [
     path('cliente', views.client_api, name='clients_api'),
+    path('tecnico', views.tecnico_api, name = 'tecnico_api'),
     path('cliente/<int:cuil>/', views.client_detail, name='client_detail'),
 ]

@@ -2,8 +2,8 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.parsers import JSONParser
-from .serializers import ClienteSerializer # para los metodos post necesito importar el serializer
-from .models import Cliente
+from .serializers import ClienteSerializer, TecnicoSerializer # para los metodos post necesito importar el serializer
+from .models import Cliente, Tecnico
 
 # Login y Logout Imports
 from django.contrib.auth.models import User
@@ -61,9 +61,36 @@ def client_detail (request, cuil):
         cliente.delete()
         return HttpResponse(status=204)
 
+@csrf_exempt
+def tecnico_api(request):
+    """
+    tecnico
+    """
+    if request.method == 'GET':
+        tecnico = Tecnico.objects.all()
+        serializer = TecnicoSerializer(tecnico, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        tecnico = TecnicoSerializer(data=data)
+        if tecnico.is_valid():
+            tecnico.save()
+            return JsonResponse(tecnico.data, status=201)
+        return JsonResponse(tecnico.errors, status=400)
+
+    elif request.method == 'DELETE':
+        tecnico = Tecnico.objects.all()
+        tecnico.delete()
+        return HttpResponse(status=204)
+
+
+
+
 
 # CRUD de Room necesito tus conocimientos en React.js
-
+# Realizar el Hashing de password para cada user.
+# Que cada user tenga un rango inicial cuando se lo crea.
 # User Login Sigo necesitando React Info
 #
 #def loginInfo(request):
