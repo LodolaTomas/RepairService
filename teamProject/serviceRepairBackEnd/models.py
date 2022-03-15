@@ -1,13 +1,14 @@
+from re import T
 from this import d
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.contrib.auth.models import User
-# Jerarquia BBDD
-# 1-Admin
-# 2-Moderador
-# 3-Tecnico Listo
-# 4-Empleado
-# 5-Cliente Listo 
+from django.conf import settings
+
+
+# imports
+
+
 
 # Tecnico 
 class Tecnico(models.Model):
@@ -63,27 +64,8 @@ class Cliente(models.Model):
 
         return nombre + " " + apellido + " - " + cuil
 
-
-
-# Reporte de Incidentes
-
-
-# Se suben las imagenes a la carpeta de upload en sus distintas categorias para ser usadas. 
-# Cliente es opcional. Pero empleado y tecnico son obligatorias.
-
-# Cuarto Hecho y Mensajes hechos que puede variar el usuario.
-# Para mejorar tendria que hacer que cada login entienda q son distintos usuarios. Hacer el CRUD.
-
-# No se si poner el topic porque ya de por si El problema principal Se ve arriba de todo.
-
-#class Topic(models.Model):
-#    name = models.CharField(max_length=200)
-    
-#    def __str__(self):
-#        return self.name
-
 class Room(models.Model):
-    host = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    host = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True)
     #topic = models.ForeignKey(Topic, on_delete=models.CASCADE)
     name = models.CharField(max_length=200)
     description = models.TextField(null=True, blank=True)
@@ -95,7 +77,7 @@ class Room(models.Model):
         return str(self.name)
 
 class Message(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     room = models.ForeignKey(Room, on_delete=models.CASCADE) # Si se borra el Room se deletean los mensajes.
     body = models.TextField()
     updated = models.DateTimeField(auto_now=True)
@@ -103,4 +85,5 @@ class Message(models.Model):
 
     def __str__(self):
         return self.body[0:50]
+
 

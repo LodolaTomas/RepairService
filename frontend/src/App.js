@@ -1,25 +1,37 @@
 /* react hooks */
-import React from 'react'
-import UserLogin from './views/userLogin/UserLogin.jsx'
-import Home from './views/home/Home.jsx'
-import {Route, Routes} from 'react-router-dom'
-/* npm install React-router-dom*/
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-function App() {
+import store from './store.js';
 
-  return (
+import Home from './containers/home/Home.jsx'
+import Login from './containers/login/Login.jsx'
+import Signup from './containers/signup/Signup.jsx'
+import Resetpassword from './containers/resetpassword/Resetpassword.jsx'
+import Resetpasswordconfirm from './containers/resetpasswordconfirm/Resetpasswordconfirm.jsx'
+import Activate from './containers/activate/Activate.jsx'
+import Layout from './hocs/Layout';
 
+function App(){
+  return(
     <div>
-      <Routes>
-        <Route path='/register' element={
-                    <UserLogin />
-                } />
-        <Route path='/' element={
-                    <Home />
-                } />
-      </Routes>
+      <Provider store={store}>
+          <Layout>
+              <Routes>
+                  <Route path='/' element={<Home />} />
+                  <Route path='/login' element={<Login />} />
+                  <Route path='/signup' element={<Signup />} />
+                  <Route path='/reset_password' element={<Resetpassword />} />
+                  <Route exact path='/password/reset/confirm/:uid/:token' element={<Resetpasswordconfirm />} />
+                  <Route path='/activate/:uid/:token' element={<Activate />} />
+              </Routes>
+          </Layout>
+      </Provider>
+
+
     </div>
-  );
+  )
 }
 
 export default App;

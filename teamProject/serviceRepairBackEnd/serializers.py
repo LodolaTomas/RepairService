@@ -1,6 +1,8 @@
 # here is the serializer for the serviceRepairBackEnd
+from asyncore import write
 from rest_framework import serializers
 from .models import Cliente, Tecnico, Tecnicos_Especialidad, Especialidades
+
 
 ## transforma de obj a json
 class ClienteSerializer(serializers.ModelSerializer):
@@ -22,3 +24,6 @@ class Tecnicos_EspecialidadSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tecnicos_Especialidad
         fields = ('cuil_tecnico', 'especialidades_id')
+
+
+
